@@ -4,6 +4,8 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import { useLocation } from "react-router-dom";
+import Contacts from "./components/contact/Contacts";
+import ContactForm from "./components/contact/Contact_Form";
 
 function App() {
   const location = useLocation();
@@ -23,7 +25,8 @@ function App() {
           <Sidebar />
         </div>
         <Routes>
-          
+          <Route path="/" element={<Contacts />} />
+          <Route path="/contact_form" element={<ContactForm/>}/>
         </Routes>
       </div>
     </div>

@@ -1,20 +1,5 @@
-
-interface Contact {
-  id: number;
-  fname: string;
-  lname: string;
-  email: string;
-  status: string;
-}
-
-interface ActionType {
-  type: string;
-  payload: any;
-}
-
-interface State {
-  contacts: Contact[];
-}
+import Contacts from "../components/contact/Contacts";
+import {Contact,ActionType,State} from "../interface/interface";
 
 const storedContactsJSON = localStorage.getItem("contacts");
 const initialContacts: Contact[] = storedContactsJSON
@@ -44,42 +29,39 @@ export default function reducer(
       };
     }
 
-    case "ADD_CONTACT": {
-      let flag = 0;
-      if (
-        action.payload.fname === "" ||
-        action.payload.lname === "" ||
-        action.payload.email === ""
-      ) {
-        alert("You missed one or more fields");
-        flag = 1;
-      } else {
-        state.contacts.forEach((person: Contact) => {
-          if (person.email === action.payload.email) {
-            alert("Email Already Exists In Contacts");
-            flag = 1;
-          }
-        });
+    case "ADD_CONTACT": { 
+      console.log(initialContacts.length)
+      let flag=0
+       if(action.payload.first_name===""||action.payload.last_name===""||action.payload.mob===""){
+          alert('ohh You Missed Required Input , Please fill')
+        flag=1
       }
-    
-      if (!flag) {
-        alert("Contact Saved Successfully!");
-        let updatedContacts = storedContactsJSON
-          ? JSON.parse(storedContactsJSON)
-          : [];
-        updatedContacts.push({
-          id: state.contacts.length + 1,
-          ...action.payload,
-        });
-        localStorage.setItem("contacts", JSON.stringify(updatedContacts));
-        return {
-          ...state,
-          contacts: [...updatedContacts],
-        };
+      else{
+     state.contacts.forEach((el)=>{
+        if(el.fname===action.payload.first_name&&el.lname===action.payload.last_name){
+            alert('Name Already Exist In Contact')
+            flag=1
+            return;
+        }
+      
+      })
       }
-    
-      return state; //to return the state if the flag condition is met
+ 
+      let updatedContacts= storedContactsJSON ? JSON.parse(storedContactsJSON) : [];
+      if(!flag){
+        alert('Contact Saved Successfully!!!')
+        updatedContacts.push({id:initialContacts.length+1,...action.payload})
+        localStorage.setItem('contacts',JSON.stringify(updatedContacts))
+      };
+      return {
+        ...state,
+        contacts: [
+        ...updatedContacts],
+      
     }
+
+      
+      }
     
 
 
