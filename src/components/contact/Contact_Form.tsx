@@ -10,7 +10,7 @@ function ContactForm() {
   const queryClient = useQueryClient();
 
   const [form, setForm] = useState<Contact>({
-    id:0,
+    id:'',
     fname: '',
     lname: '',
     email: '',

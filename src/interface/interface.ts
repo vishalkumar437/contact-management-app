@@ -1,5 +1,5 @@
  interface Contact {
-    id:number;
+    id:string;
     fname: string;
     lname: string;
     email: string;

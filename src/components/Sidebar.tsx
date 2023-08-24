@@ -21,7 +21,7 @@ export default function Sidebar() {
               </li>
               <li className="rounded-sm">
                 <Link
-                  to="/charts"
+                  to="/dashboard"
                   className="flex items-center p-2 space-x-3 rounded-md font-bold hover:font-outline"
                 >
                   <img src={bar} alt="" />

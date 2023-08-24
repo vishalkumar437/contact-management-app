@@ -1,4 +1,3 @@
-import Contacts from "../components/contact/Contacts";
 import {Contact,ActionType,State} from "../interface/interface";
 
 const storedContactsJSON = localStorage.getItem("contacts");
@@ -9,7 +8,7 @@ const initialContacts: Contact[] = storedContactsJSON
 const initialState: State = {
   contacts: initialContacts,
 };
-
+let lastUsedId = initialContacts.length > 0 ? initialContacts[initialContacts.length - 1].id : "0";
 export default function reducer(
   state: State = initialState,
   action: ActionType
@@ -17,54 +16,49 @@ export default function reducer(
   switch (action.type) {
 
     case "REMOVE_CONTACT": {
+      console.log("Action Payload:", action.payload);
       let Contacts = storedContactsJSON ? JSON.parse(storedContactsJSON) : [];
       let updatedContacts = Contacts.filter(
         (person: Contact) => person.id !== action.payload.id
       );
+      console.log(updatedContacts);
       localStorage.setItem("contacts", JSON.stringify(updatedContacts));
       return {
         ...state,
-
         contacts: [...updatedContacts],
       };
     }
 
-    case "ADD_CONTACT": { 
-      console.log(initialContacts.length)
-      let flag=0
-       if(action.payload.first_name===""||action.payload.last_name===""||action.payload.mob===""){
-          alert('ohh You Missed Required Input , Please fill')
-        flag=1
-      }
-      else{
-     state.contacts.forEach((el)=>{
-        if(el.fname===action.payload.first_name&&el.lname===action.payload.last_name){
-            alert('Name Already Exist In Contact')
-            flag=1
+    case "ADD_CONTACT": {
+      let flag = 0;
+
+      if (action.payload.first_name === "" || action.payload.last_name === "" || action.payload.mob === "") {
+        alert('You missed some required fields');
+        flag = 1;
+      } else {
+        state.contacts.forEach((el) => {
+          if (el.fname === action.payload.first_name && el.lname === action.payload.last_name) {
+            alert('Name Already Exists In Contacts');
+            flag = 1;
             return;
-        }
-      
-      })
+          }
+        });
       }
- 
-      let updatedContacts= storedContactsJSON ? JSON.parse(storedContactsJSON) : [];
-      if(!flag){
-        alert('Contact Saved Successfully!!!')
-        updatedContacts.push({id:initialContacts.length+1,...action.payload})
-        localStorage.setItem('contacts',JSON.stringify(updatedContacts))
-      };
-      return {
-        ...state,
-        contacts: [
-        ...updatedContacts],
-      
+
+      if (!flag) {
+        lastUsedId  = String(Number(lastUsedId) + 1);
+        const newContact: Contact = { ...action.payload, id: lastUsedId };
+        const updatedContacts = [...state.contacts, newContact];
+        localStorage.setItem('contacts', JSON.stringify(updatedContacts));
+        return {
+          ...state,
+          contacts: updatedContacts,
+        };
+      }
+
+      return state;
     }
-
-      
-      }
     
-
-
     case "EDIT_CONTACT": {
       if (
         action.payload.first_name === "" ||

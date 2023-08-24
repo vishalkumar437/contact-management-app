@@ -6,6 +6,8 @@ import Sidebar from "./components/Sidebar";
 import { useLocation } from "react-router-dom";
 import Contacts from "./components/contact/Contacts";
 import ContactForm from "./components/contact/Contact_Form";
+import EditContact from "./components/contact/Edit_Contact";
+import Dashboard from "./components/Dasboard/Dashboard";
 
 function App() {
   const location = useLocation();
@@ -27,6 +29,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Contacts />} />
           <Route path="/contact_form" element={<ContactForm/>}/>
+          <Route path="/edit/:id" element={<EditContact/>}/>
+          <Route path="/dashboard" element={<Dashboard/>}/>
         </Routes>
       </div>
     </div>

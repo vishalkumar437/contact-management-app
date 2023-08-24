@@ -2,7 +2,7 @@ import {Contact} from "../interface/interface";
 const ADD = "ADD_CONTACT";
 const EDIT = "EDIT_CONTACT";
 const REMOVE = "REMOVE_CONTACT";
-export const removeContact = (id:number) => {
+export const removeContact = (id:string) => {
   return {
     type: REMOVE,
     payload: {
