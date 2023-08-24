@@ -32,13 +32,13 @@ export default function reducer(
     case "ADD_CONTACT": {
       let flag = 0;
 
-      if (action.payload.first_name === "" || action.payload.last_name === "" || action.payload.mob === "") {
+      if (action.payload.first_name === "" || action.payload.last_name === "" || action.payload.email === "") {
         alert('You missed some required fields');
         flag = 1;
       } else {
         state.contacts.forEach((el) => {
-          if (el.fname === action.payload.first_name && el.lname === action.payload.last_name) {
-            alert('Name Already Exists In Contacts');
+          if (el.email === action.payload.email) {
+            alert('Email Already Exists In Contacts');
             flag = 1;
             return;
           }
@@ -55,7 +55,6 @@ export default function reducer(
           contacts: updatedContacts,
         };
       }
-
       return state;
     }
     

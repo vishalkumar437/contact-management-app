@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-, "src/Redux/store.ts", "src/Redux/reducer.ts"  ]
+, "src/store/store.ts", "src/store/reducer.ts"  ]
 }

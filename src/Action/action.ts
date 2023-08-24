@@ -1,10 +1,7 @@
 import {Contact} from "../interface/interface";
-const ADD = "ADD_CONTACT";
-const EDIT = "EDIT_CONTACT";
-const REMOVE = "REMOVE_CONTACT";
 export const removeContact = (id:string) => {
   return {
-    type: REMOVE,
+    type: "REMOVE_CONTACT",
     payload: {
       id,
     },
@@ -13,14 +10,14 @@ export const removeContact = (id:string) => {
 
 export const addContact = (payload:Contact) => {
   return {
-    type: ADD,
+    type: "ADD_CONTACT",
     payload,
   };
 };
 
 export const editContact = (payload:Contact) => {
   return {
-    type: EDIT,
+    type: "EDIT_CONTACT",
     payload,
   };
 };

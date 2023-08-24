@@ -41,7 +41,7 @@ function EditContact() {
   }
 
   useEffect(() => {
-    AllContact.filter((el:Contact) => el.id == (id) && setForm(el));
+    AllContact.filter((el:Contact) => el.id === (id) && setForm(el));
   }, [id, AllContact]); // Include id and AllContact in the dependency array
 
   return (

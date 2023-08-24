@@ -2,12 +2,12 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Sidebar from "./components/Sidebar";
+import Sidebar from "./components/sidebar/Sidebar";
 import { useLocation } from "react-router-dom";
 import Contacts from "./components/contact/Contacts";
 import ContactForm from "./components/contact/Contact_Form";
 import EditContact from "./components/contact/Edit_Contact";
-import Dashboard from "./components/Dasboard/Dashboard";
+import Dashboard from "./components/Dasboard/Charts";
 
 function App() {
   const location = useLocation();
@@ -16,9 +16,9 @@ function App() {
   return (
     <div className="App">
       <h1 className="text-white w-full shadow shadow-slate-700 top-0 text-2xl  bg-blue-600 font-bold z-50 p-4">
-        {currentRoute == "/"
+        {currentRoute === "/"
           ? "Contact Management App"
-          : currentRoute == "/contact_form"
+          : currentRoute === "/contact_form"
           ? "Contacts"
           : "Charts and Maps"}
       </h1>

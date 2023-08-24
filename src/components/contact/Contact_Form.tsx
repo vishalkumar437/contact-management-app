@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { addContact } from '../../Action/action';
 import { useMutation, useQueryClient } from 'react-query';
 import { Contact } from '../../interface/interface';
 
-
-function ContactForm() {
+ const ContactForm=()=> {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
 
@@ -114,5 +115,4 @@ function ContactForm() {
     </div>
   );
 }
-
-export default ContactForm;
+export default ContactForm
